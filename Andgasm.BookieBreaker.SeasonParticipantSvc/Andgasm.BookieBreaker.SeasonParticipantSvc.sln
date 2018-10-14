@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E1B697-007C-45B3-91DC-14055A1DC693}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.Http", "..\..\..\AngasmDev\BookieBreaker\Andgasm.BookieBreaker\Andgasm.Http\Andgasm.Http.csproj", "{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
