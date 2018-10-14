@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Mapping\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Andgasm.ServiceBus" Version="0.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.20.1" />
   </ItemGroup>
 
 </Project>
