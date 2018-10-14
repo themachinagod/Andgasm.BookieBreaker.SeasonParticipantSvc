@@ -1,8 +1,10 @@
-﻿using Andgasm.BookieBreaker.SeasonParticipant.Core;
+﻿using Andgasm.BookieBreaker.Harvest;
+using Andgasm.BookieBreaker.SeasonParticipant.Core;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
@@ -29,9 +31,13 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
         {
             Host.ConfigureServices((_hostcontext, services) =>
             {
-                services.AddLogging();
-                services.AddTransient(typeof(SeasonParticipantHarvester));
                 services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
+                services.Configure<ApiSettings>(Configuration.GetSection("API"));
+                services.AddTransient(typeof(SeasonParticipantHarvester));
+                services.AddTransient(typeof(HarvestRequestManager));
+                services.AddLogging(loggingBuilder => loggingBuilder
+                    .AddConsole()
+                    .SetMinimumLevel(LogLevel.Debug));
 
                 services.AddSingleton(sp =>
                 {
@@ -40,7 +46,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
                                                                         Configuration.GetSection("ServiceBus")["NewSeasonTopicName"],
                                                                         Configuration.GetSection("ServiceBus")["NewSeasonSubscriptionName"]);
                 });
-                services.AddScoped<SeasonParticipantExtractorSvc>();
+                services.AddScoped<IHostedService, SeasonParticipantExtractorSvc>();
             });
         }
     }
