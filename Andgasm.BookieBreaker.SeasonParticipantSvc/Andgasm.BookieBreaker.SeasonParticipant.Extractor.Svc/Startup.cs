@@ -22,6 +22,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
                 config.SetBasePath(Environment.CurrentDirectory);
                 config.AddJsonFile("appsettings.json", optional: false);
                 config.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
+                config.AddUserSecrets<Startup>();
                 Configuration = config.Build();
             });
             ConfigureServices();
@@ -31,13 +32,31 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
         {
             Host.ConfigureServices((_hostcontext, services) =>
             {
-                services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
-                services.Configure<ApiSettings>(Configuration.GetSection("API"));
-                services.AddTransient(typeof(SeasonParticipantHarvester));
-                services.AddTransient(typeof(HarvestRequestManager));
+                services.AddSingleton(sp =>
+                {
+                    return new BusSettings()
+                    {
+                        ServiceBusHost = Configuration.GetSection("ServiceBus")["ServiceBusHost"],
+                        ServiceBusConnectionString = Configuration.GetSection("ServiceBus")["ServiceBusConnectionString"],
+                        NewClubSeasonAssociationSubscriptionName = Configuration.GetSection("ServiceBus")["NewSeasonSubscriptionName"],
+                        NewClubSeasonAssociationTopicName = Configuration.GetSection("ServiceBus")["NewSeasonTopicName"]
+                    };
+                });
+                services.AddSingleton(sp =>
+                {
+                    return new ApiSettings()
+                    {
+                        SeasonsDbApiRootKey = Configuration.GetSection("API")["SeasonsDbApiRootKey"],
+                        ClubSeasonRegistrationsApiPath = Configuration.GetSection("API")["ClubSeasonRegistrationsApiPath"]
+                    };
+                });
+
                 services.AddLogging(loggingBuilder => loggingBuilder
                     .AddConsole()
                     .SetMinimumLevel(LogLevel.Debug));
+
+                services.AddTransient(typeof(SeasonParticipantHarvester));
+                services.AddSingleton(typeof(HarvestRequestManager));
 
                 services.AddSingleton(sp =>
                 {
@@ -46,7 +65,10 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
                                                                         Configuration.GetSection("ServiceBus")["NewSeasonTopicName"],
                                                                         Configuration.GetSection("ServiceBus")["NewSeasonSubscriptionName"]);
                 });
+
                 services.AddScoped<IHostedService, SeasonParticipantExtractorSvc>();
+
+
             });
         }
     }

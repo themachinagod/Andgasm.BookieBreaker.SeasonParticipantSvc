@@ -53,7 +53,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
                             SeasonKey = p.SeasonCode
                         };
                         _context.ClubSeasonAssociations.Add(association);
-                        //await _newClubSeasonRegistrationBus.SendEvent(BuildNewClubSeasonAssociationEvent(p.ClubCode, p.StageCode, p.SeasonCode, p.ClubCode));
+                        await _newClubSeasonRegistrationBus.SendEvent(BuildNewClubSeasonAssociationEvent(p.ClubCode, p.StageCode, p.SeasonCode, p.ClubCode));
                     }
                 }
                 if (dochange) await _context.SaveChangesAsync();
