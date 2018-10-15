@@ -14,6 +14,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.Core.Tests", "Andgasm.BookieBreaker.SeasonParticipant.Core.Tests\Andgasm.BookieBreaker.SeasonParticipant.Core.Tests.csproj", "{4445B0F9-532B-4692-B802-AAC61ED8F77E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{07D40E01-E59C-4427-9D1E-26D854C6E0E9}"
+	ProjectSection(SolutionItems) = preProject
+		..\ReadMe.md = ..\ReadMe.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E1B697-007C-45B3-91DC-14055A1DC693}"
 EndProject
