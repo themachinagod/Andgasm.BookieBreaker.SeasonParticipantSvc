@@ -3,21 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc", "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc\Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc.csproj", "{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc", "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc\Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc.csproj", "{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant.API", "Andgasm.BookieBreaker.SeasonParticipant.API\Andgasm.BookieBreaker.SeasonParticipant.API.csproj", "{8DC5BAAB-0651-4FE0-A259-2EC1526ECAE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.API", "Andgasm.BookieBreaker.SeasonParticipant.API\Andgasm.BookieBreaker.SeasonParticipant.API.csproj", "{8DC5BAAB-0651-4FE0-A259-2EC1526ECAE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant.Core", "Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BookieBreaker.SeasonParticipant.Core.csproj", "{F0557CA2-3D9D-46FC-AD3C-81DB9C6A2452}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.Core", "Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BookieBreaker.SeasonParticipant.Core.csproj", "{F0557CA2-3D9D-46FC-AD3C-81DB9C6A2452}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant.API.Tests", "Andgasm.BookieBreaker.SeasonParticipant.API.Tests\Andgasm.BookieBreaker.SeasonParticipant.API.Tests.csproj", "{296B10FC-C558-4A55-AAC9-B722C0E9C0AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.API.Tests", "Andgasm.BookieBreaker.SeasonParticipant.API.Tests\Andgasm.BookieBreaker.SeasonParticipant.API.Tests.csproj", "{296B10FC-C558-4A55-AAC9-B722C0E9C0AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant.Core.Tests", "Andgasm.BookieBreaker.SeasonParticipant.Core.Tests\Andgasm.BookieBreaker.SeasonParticipant.Core.Tests.csproj", "{4445B0F9-532B-4692-B802-AAC61ED8F77E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.Core.Tests", "Andgasm.BookieBreaker.SeasonParticipant.Core.Tests\Andgasm.BookieBreaker.SeasonParticipant.Core.Tests.csproj", "{4445B0F9-532B-4692-B802-AAC61ED8F77E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{07D40E01-E59C-4427-9D1E-26D854C6E0E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E1B697-007C-45B3-91DC-14055A1DC693}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.Http", "..\..\..\AngasmDev\BookieBreaker\Andgasm.BookieBreaker\Andgasm.Http\Andgasm.Http.csproj", "{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +43,6 @@ Global
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F8D33A4-FCB1-4721-B237-0D458BF1F8C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

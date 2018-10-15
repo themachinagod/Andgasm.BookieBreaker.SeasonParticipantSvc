@@ -11,8 +11,6 @@ using Andgasm.BookieBreaker.Harvest;
 using Andgasm.BookieBreaker.Harvest.WhoScored;
 using System.Dynamic;
 using Andgasm.Http;
-using System.Linq;
-using System.Text;
 
 namespace Andgasm.BookieBreaker.SeasonParticipant.Core
 {
@@ -77,7 +75,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
                         var cl =  CreateSeasonParticipant(cr);
                         clubs.Add(cl);
                     }                   
-                    await HttpRequestFactory.Save(clubs, _participantsapiroot, _registrationsApiPath);
+                    await HttpRequestFactory.Post(clubs, _participantsapiroot, _registrationsApiPath);
                     _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonKey));
                 }
                 else
