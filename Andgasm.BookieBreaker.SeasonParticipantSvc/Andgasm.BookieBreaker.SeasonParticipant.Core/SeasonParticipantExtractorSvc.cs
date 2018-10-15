@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,12 +32,13 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             //    _harvester.CookieString = init.RealisedCookie;
             //}
 
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            // DBr: temp scratch code line to manually test without bus!!
+            //await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
 
-            //_logger.LogDebug("SeasonParticipantExtractorSvc.Svc is registering to new season events...");
-            //_newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
-            //_logger.LogDebug("SeasonParticipantExtractorSvc.Svc is now listening for new season events");
-            //await Task.CompletedTask;
+            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is registering to new season events...");
+            _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is now listening for new season events");
+            await Task.CompletedTask;
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
@@ -51,12 +53,12 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             var payload = Encoding.UTF8.GetString(message.Body);
             _logger.LogDebug($"Received message: Body:{payload}");
 
-            var payloadvalues = JsonConvert.DeserializeObject<Dictionary<string, string>>(payload);
-            _harvester.TournamentCode = payloadvalues["tournamentcode"];
-            _harvester.SeasonCode = payloadvalues["seasoncode"];
-            _harvester.StageCode = payloadvalues["stagecode"];
-            _harvester.RegionCode = payloadvalues["regioncode"];
-            _harvester.CountryCode = payloadvalues["countrycode"];
+            dynamic payloadvalues = JsonConvert.DeserializeObject<ExpandoObject>(payload);
+            _harvester.TournamentCode = payloadvalues.TournamentCode;
+            _harvester.SeasonCode = payloadvalues.SeasonCode;
+            _harvester.StageCode = payloadvalues.StageCode;
+            _harvester.RegionCode = payloadvalues.RegionCode;
+            _harvester.CountryCode = payloadvalues.CountryCode;
             await _harvester.Execute();
             await _newseasonBus.CompleteEvent(message.LockToken);
         }
@@ -72,16 +74,17 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             return Task.CompletedTask;
         }
 
-
-
-        // tmp
-
-        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
-        {
-            // TODO: temp to demo payload comms
-            string jsonpayload = string.Format(@"""tournamentcode"":""{0}"",""seasoncode"":""{1}"",""stagecode"":""{2}"",""regioncode"":""{3}"",""countrycode"":""{4}""", tournamentcode, seasoncode, stagecode, regioncode, countrycode);
-            var payload = Encoding.UTF8.GetBytes("{" + jsonpayload + "}");
-            return new BusEventBase(payload);
-        }
+        // scratch code to manually invoke new season - invoke from startasync to debug without bus
+        //public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
+        //{
+        //    dynamic jsonpayload = new ExpandoObject();
+        //    jsonpayload.TournamentCode = tournamentcode;
+        //    jsonpayload.SeasonCode = seasoncode;
+        //    jsonpayload.StageCode = stagecode;
+        //    jsonpayload.RegionCode = regioncode;
+        //    jsonpayload.CountryCode = countrycode;
+        //    var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
+        //    return new BusEventBase(payload);
+        //}
     }
 }
