@@ -14,7 +14,6 @@ using NSwag.Annotations;
 
 namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class SeasonsController : Controller
