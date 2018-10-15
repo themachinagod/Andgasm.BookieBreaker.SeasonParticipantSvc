@@ -84,7 +84,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
         }
         #endregion
 
-        #region Entity Creation Helpers
+        #region Request Helpers
         private string CreateRequestUrl()
         {
             return string.Format(WhoScoredConstants.SeasonsUrl, RegionCode, TournamentCode, SeasonCode);
@@ -99,7 +99,9 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             if (p != null) LastModeKey = GetLastModeKey(p.DocumentNode.InnerText);
             return p;
         }
+        #endregion
 
+        #region Entity Creation Helpers
         private JArray ParseClubsFromResponse(HtmlDocument response)
         {
             var rawdata = response.DocumentNode.InnerHtml;

@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Andgasm.BookieBreaker.SeasonParticipant.API.Models;
+using Andgasm.BookieBreaker.SeasonParticipant.Core;
 using Andgasm.ServiceBus;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NJsonSchema;
 using NSwag.AspNetCore;
 
@@ -37,11 +31,10 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API
             services.AddDbContext<SeasonParticipantsDb>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors();
             services.AddSwagger();
-            services.Configure<Settings>(Configuration.GetSection("ServiceBus"));
+            services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
            
             services.AddTransient<Func<string, IBusClient>>(serviceProvider => key =>
             {

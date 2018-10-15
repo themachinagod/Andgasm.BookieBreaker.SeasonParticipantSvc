@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
 using System.Threading;
@@ -35,17 +33,17 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             // DBr: temp scratch code line to manually test without bus!!
             //await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
 
-            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is registering to new season events...");
+            _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
             _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
-            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is now listening for new season events");
+            _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogDebug("SquadRegistrationExtractor.Svc is closing...");
+            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is closing...");
             await _newseasonBus.Close();
-            _logger.LogDebug("SquadRegistrationExtractor.Svc has successfully shut down...");
+            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc has successfully shut down...");
         }
 
         static async Task ProcessMessagesAsync(IBusEvent message, CancellationToken c)

@@ -11,6 +11,9 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
 
         public string NewClubSeasonAssociationTopicName { get; set; }
         public string NewClubSeasonAssociationSubscriptionName { get; set; }
+
+        public string NewSeasonTopicName { get; set; }
+        public string NewSeasonSubscriptionName { get; set; }
     }
 
     public class ApiSettings
