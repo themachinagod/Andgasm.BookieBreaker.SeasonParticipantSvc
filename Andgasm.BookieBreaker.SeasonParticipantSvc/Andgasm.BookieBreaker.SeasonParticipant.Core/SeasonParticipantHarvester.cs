@@ -30,15 +30,11 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
         #endregion
 
         #region Properties
-        public string SeasonName { get; set; }
         public string StageCode { get; set; }
         public string SeasonCode { get; set; }
         public string TournamentCode { get; set; }
         public string RegionCode { get; set; }
-        public string SeasonKey { get; set; }
-        public string CountryKey { get; set; }
-        public DateTime SeasonStartDate { get; set; }
-        public DateTime SeasonEndDate { get; set; }
+        public string CountryCode { get; set; }
         #endregion
 
         #region Contructors
@@ -76,11 +72,11 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
                         clubs.Add(cl);
                     }                   
                     await HttpRequestFactory.Post(clubs, _participantsapiroot, _registrationsApiPath);
-                    _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonKey));
+                    _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonCode));
                 }
                 else
                 {
-                    _logger.LogDebug(string.Format("Failed to store & commit club registations for season '{0}'", SeasonKey));
+                    _logger.LogDebug(string.Format("Failed to store & commit club registations for season '{0}'", SeasonCode));
                 }
                 HarvestHelper.FinaliseTimer(_timer);
             }
@@ -113,23 +109,12 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
 
         private ExpandoObject CreateSeasonParticipant(JToken clubdata)
         {
-            dynamic club = new ExpandoObject();
-            club.Name = clubdata[teamNameIndex].ToString();
-            club.ClubCode = clubdata[teamIdIndex].ToString();
-            club.CountryKey = CountryKey;
-            club.Key = $"{club.CountryKey}-{club.Name}";
-
-            dynamic clubseasonlink = new ExpandoObject();
-
-            clubseasonlink.ClubKey = club.Key;
-            clubseasonlink.SeasonKey = SeasonKey;
-            clubseasonlink.ClubSeasonCode = club.ClubCode;
-            clubseasonlink.StageCode = StageCode;
-
             dynamic registration = new ExpandoObject();
-            registration.ClubResource = club;
-            registration.AssociationResource = clubseasonlink;
-
+            registration.ClubCode = clubdata[teamIdIndex].ToString();
+            registration.ClubName = clubdata[teamNameIndex].ToString();
+            registration.CountryCode = CountryCode;
+            registration.SeasonCode = SeasonCode;
+            registration.StageCode = StageCode;
             return registration;
         }
         #endregion

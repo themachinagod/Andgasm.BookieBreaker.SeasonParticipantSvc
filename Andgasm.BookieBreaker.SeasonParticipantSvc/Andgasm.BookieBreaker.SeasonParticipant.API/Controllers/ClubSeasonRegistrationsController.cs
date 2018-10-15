@@ -31,31 +31,29 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
                 bool dochange = false;
                 foreach (var p in model)
                 {
-                    if (!_context.Clubs.Any(x => x.Key == p.ClubResource.Key))
+                    if (!_context.Clubs.Any(x => x.Key == p.ClubCode)) 
                     {
                         dochange = true;
                         var club = new Club()
                         {
-                            Key = p.ClubResource.Key,
-                            Name = p.ClubResource.Name,
-                            NickName = p.ClubResource.NickName,
-                            CountryKey = p.ClubResource.CountryKey,
-                            StadiumName = p.ClubResource.StadiumName,
+                            Key = p.ClubCode,
+                            Name = p.ClubName,
+                            NickName = p.ClubNickName,
+                            CountryKey = p.CountryCode,
+                            StadiumName = p.StadiumName,
                         };
                         _context.Clubs.Add(club);
                     }
-                    if (!_context.ClubSeasonAssociations.Any(x => x.Key == p.AssociationResource.Key))
+                    if (!_context.ClubSeasonAssociations.Any(x => x.ClubKey == p.ClubCode && x.SeasonKey == p.SeasonCode))
                     {
                         dochange = true;
                         var association = new ClubSeasonAssociation()
                         {
-                            Key = p.AssociationResource.Key,
-                            ClubKey = p.AssociationResource.ClubKey,
-                            SeasonKey = p.AssociationResource.SeasonKey,
-                            ClubSeasonCode = p.AssociationResource.ClubSeasonCode,
+                            ClubKey = p.ClubCode,
+                            SeasonKey = p.SeasonCode
                         };
                         _context.ClubSeasonAssociations.Add(association);
-                        await _newClubSeasonRegistrationBus.SendEvent(BuildNewClubSeasonAssociationEvent(p.AssociationResource.ClubSeasonCode, p.AssociationResource.StageCode, p.AssociationResource.SeasonKey, p.ClubResource.Key));
+                        //await _newClubSeasonRegistrationBus.SendEvent(BuildNewClubSeasonAssociationEvent(p.ClubCode, p.StageCode, p.SeasonCode, p.ClubCode));
                     }
                 }
                 if (dochange) await _context.SaveChangesAsync();

@@ -2,7 +2,13 @@
 {
     public class ClubSeasonRegistrationResource
     {
-        public ClubResource ClubResource { get; set; }
-        public ClubSeasonAssociationResource AssociationResource { get; set; }
+        public string ClubName { get; set; }
+        public string ClubNickName { get; set; }
+        public string StadiumName { get; set; }
+
+        public string CountryCode { get; set; }
+        public string ClubCode { get; set; }
+        public string SeasonCode { get; set; }
+        public string StageCode { get; set; }
     }
 }

@@ -15,7 +15,5 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Models
         }
         public string ClubKey { get; set; }
         public string SeasonKey { get; set; }
-
-        public string ClubSeasonCode { get; set; }
     }
 }

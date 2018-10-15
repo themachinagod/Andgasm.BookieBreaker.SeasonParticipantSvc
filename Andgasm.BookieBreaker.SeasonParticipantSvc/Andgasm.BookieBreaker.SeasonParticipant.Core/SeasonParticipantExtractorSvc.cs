@@ -31,10 +31,12 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             //    _harvester.CookieString = init.RealisedCookie;
             //}
 
-            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is registering to new season events...");
-            _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
-            _logger.LogDebug("SeasonParticipantExtractorSvc.Svc is now listening for new season events");
-            await Task.CompletedTask;
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "2020/21", "252", "gb-eng", new DateTime(2020, 5, 1), new DateTime(2021, 7, 1)), new CancellationToken());
+
+            //_logger.LogDebug("SeasonParticipantExtractorSvc.Svc is registering to new season events...");
+            //_newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            //_logger.LogDebug("SeasonParticipantExtractorSvc.Svc is now listening for new season events");
+            //await Task.CompletedTask;
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
@@ -54,10 +56,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _harvester.SeasonCode = payloadvalues["seasoncode"];
             _harvester.StageCode = payloadvalues["stagecode"];
             _harvester.RegionCode = payloadvalues["regioncode"];
-            _harvester.SeasonKey = payloadvalues["seasonkey"];
-            _harvester.CountryKey = payloadvalues["countrykey"];
-            _harvester.SeasonStartDate = Convert.ToDateTime(payloadvalues["startdate"]);
-            _harvester.SeasonEndDate = Convert.ToDateTime(payloadvalues["enddate"]);
+            _harvester.CountryCode = payloadvalues["countrykey"];
             await _harvester.Execute();
             await _newseasonBus.CompleteEvent(message.LockToken);
         }
@@ -71,6 +70,18 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _logger.LogDebug($"- Stack: {context.StackTrace}");
             _logger.LogDebug($"- Source: {context.Source}");
             return Task.CompletedTask;
+        }
+
+
+
+
+
+        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string seasonkey, string regioncode, string countrykey, DateTime seasonstartdate, DateTime seasonenddate)
+        {
+            // TODO: temp to demo payload comms
+            string jsonpayload = string.Format(@"""tournamentcode"":""{0}"",""seasoncode"":""{1}"",""stagecode"":""{2}"",""seasonkey"":""{3}"",""regioncode"":""{4}"",""countrykey"":""{5}"",""startdate"":""{6}"",""enddate"":""{7}""", tournamentcode, seasoncode, stagecode, seasonkey, regioncode, countrykey, seasonstartdate, seasonenddate);
+            var payload = Encoding.UTF8.GetBytes("{" + jsonpayload + "}");
+            return new BusEventBase(payload);
         }
     }
 }
