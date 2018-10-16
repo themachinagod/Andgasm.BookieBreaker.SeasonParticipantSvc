@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Andgasm.BookieBreaker.Global;
 using HtmlAgilityPack;
 using Andgasm.BookieBreaker.Harvest;
-using Andgasm.BookieBreaker.Harvest.WhoScored;
 using System.Dynamic;
 using Andgasm.Http;
 
