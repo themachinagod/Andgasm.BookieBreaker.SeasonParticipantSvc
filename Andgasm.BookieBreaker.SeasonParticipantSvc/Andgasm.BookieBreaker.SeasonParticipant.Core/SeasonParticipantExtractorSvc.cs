@@ -31,11 +31,21 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             //}
 
             // DBr: temp scratch code line to manually test without bus!!
-            //await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
 
-            _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
-            _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
-            _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+
+            //_logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
+            //_newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            //_logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;
         }
 
@@ -58,7 +68,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _harvester.RegionCode = payloadvalues.RegionCode;
             _harvester.CountryCode = payloadvalues.CountryCode;
             await _harvester.Execute();
-            await _newseasonBus.CompleteEvent(message.LockToken);
+            //await _newseasonBus.CompleteEvent(message.LockToken);
         }
 
         static Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
@@ -73,16 +83,16 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
         }
 
         // scratch code to manually invoke new season - invoke from startasync to debug without bus
-        //public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
-        //{
-        //    dynamic jsonpayload = new ExpandoObject();
-        //    jsonpayload.TournamentCode = tournamentcode;
-        //    jsonpayload.SeasonCode = seasoncode;
-        //    jsonpayload.StageCode = stagecode;
-        //    jsonpayload.RegionCode = regioncode;
-        //    jsonpayload.CountryCode = countrycode;
-        //    var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
-        //    return new BusEventBase(payload);
-        //}
+        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
+        {
+            dynamic jsonpayload = new ExpandoObject();
+            jsonpayload.TournamentCode = tournamentcode;
+            jsonpayload.SeasonCode = seasoncode;
+            jsonpayload.StageCode = stagecode;
+            jsonpayload.RegionCode = regioncode;
+            jsonpayload.CountryCode = countrycode;
+            var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
+            return new BusEventBase(payload);
+        }
     }
 }

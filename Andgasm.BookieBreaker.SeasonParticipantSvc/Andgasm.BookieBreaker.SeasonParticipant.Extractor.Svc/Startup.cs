@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 
 namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
@@ -56,7 +57,12 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
                     .SetMinimumLevel(LogLevel.Debug));
 
                 services.AddTransient(typeof(SeasonParticipantHarvester));
-                services.AddSingleton(typeof(HarvestRequestManager));
+                services.AddSingleton((ctx) =>
+                {
+                    return new HarvestRequestManager(ctx.GetService<ILogger<HarvestRequestManager>>(), 
+                                                     Convert.ToInt32(Configuration["MaxRequestsPerSecond"]));
+                });
+                
 
                 services.AddSingleton(sp =>
                 {

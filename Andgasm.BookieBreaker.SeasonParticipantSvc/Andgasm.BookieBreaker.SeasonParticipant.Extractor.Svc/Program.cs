@@ -20,6 +20,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
             Console.Title = "SeasonParticipantExtractor.Svc";
             var boot = new Startup();
             await boot.Host.RunConsoleAsync();
+            Console.ReadKey();
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
                     {
                         clubs.Add(CreateSeasonParticipant(cr));
                     }                   
-                    await HttpRequestFactory.Post(clubs, _participantsapiroot, _registrationsApiPath);
+                    await HttpRequestFactory.Post(clubs, _participantsapiroot, _registrationsApiPath); // TODO: handle success/fail
                     _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonCode));
                 }
                 else
@@ -94,7 +94,10 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             // TODO: hardwired cookie for now!!
             // TODO: hardwired accept string for now!!
             var url = CreateRequestUrl();
-            var p = await HarvestHelper.AttemptRequest(url, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", null, LastModeKey, @"_ga=GA1.2.638389433.1532114109; visid_incap_774904=2VHWR4OrQJ6JcpSUOUIzzJ40UlsAAAAAVUIPAAAAAACAaMiFAU1lv1DEH1MajB012/jYOqYUG7V9; incap_ses_197_774904=rvV/J6YaG1KhxcAp2eS7Ap2Fw1sAAAAAVyFGKcp7/RJBIf7GMdyqQw==; _gid=GA1.2.2146653111.1539540384; _gat=1; _gat_subdomainTracker=1; permutive-session=%7B%22session_id%22%3A%228b5b98a0-c36e-4dad-8949-c45e88e4aef9%22%2C%22last_updated%22%3A%222018-10-14T18%3A06%3A44.463Z%22%7D; permutive-id=83bacd56-cd14-4978-9e5a-a9fe66cbc915; _pdfps=%5B%5D; euconsent=BOVozhmOVozhmABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; __gads=ID=d20ed5572668f88a:T=1539540387:S=ALNI_MZxp2s2AxIAFT0AayrZHABc_FJYDw; __ybotpvd=2; ct=GB", null, false, _requestmanager);
+            var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", null,
+                                                            @"_ga=GA1.2.475102393.1531736415; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASEIPAAAAAACAxpCHAbkPzqLpJq9lqRP7AX28QjvYaNIh; incap_ses_868_774904=TdH5HJfe6XcVxOrC7cELDIruxVsAAAAAXXeGl9Hc/EK/2QHce86jyA==; _gid=GA1.2.1911830807.1539698326; _gat=1; _gat_subdomainTracker=1; permutive-session=%7B%22session_id%22%3A%22722e5291-29b4-4f8f-921b-863c31811cae%22%2C%22last_updated%22%3A%222018-10-16T13%3A58%3A50.169Z%22%7D; permutive-id=1ec4f0a4-8f59-485c-91fb-e9e54d189528; _pdfps=%5B%5D; euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; __ybotpvd=2; ct=GB",
+                                                            null, false, false, false);
+            var p = await _requestmanager.MakeRequest(url, ctx);
             if (p != null) LastModeKey = GetLastModeKey(p.DocumentNode.InnerText);
             return p;
         }
