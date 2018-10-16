@@ -31,21 +31,11 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             //}
 
             // DBr: temp scratch code line to manually test without bus!!
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
+            //await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
 
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-
-            //_logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
-            //_newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
-            //_logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
+            _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
+            _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;
         }
 
@@ -68,7 +58,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _harvester.RegionCode = payloadvalues.RegionCode;
             _harvester.CountryCode = payloadvalues.CountryCode;
             await _harvester.Execute();
-            //await _newseasonBus.CompleteEvent(message.LockToken);
+            await _newseasonBus.CompleteEvent(message.LockToken);
         }
 
         static Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
