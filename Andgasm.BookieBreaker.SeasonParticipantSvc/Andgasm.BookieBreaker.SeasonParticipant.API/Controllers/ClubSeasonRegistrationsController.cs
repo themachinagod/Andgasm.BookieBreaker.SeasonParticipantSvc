@@ -35,8 +35,6 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
         #endregion
 
         [HttpPost(Name = "CreateClubSeasonRegistration")]
-        [SwaggerResponse(typeof(ClubSeasonRegistrationsController), IsNullable = true,
-                         Description = "Indicator of successfull creation of all resources on the request body.")]
         public async Task<IActionResult> CreateBatch([FromBody]List<ClubSeasonRegistrationResource> resources)
         {
             if (resources == null) return BadRequest("A batch of club season registration resources was expected on request body!");
