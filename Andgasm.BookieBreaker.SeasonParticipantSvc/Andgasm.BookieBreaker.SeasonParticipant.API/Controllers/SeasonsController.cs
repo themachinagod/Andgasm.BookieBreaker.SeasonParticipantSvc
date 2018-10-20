@@ -72,7 +72,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
                         StageCode = model.StageCode
                     };
                     _context.Seasons.Add(season);
-                    await _newSeasonRegistrationBus.SendEvent(BuildNewSeasonEvent(model.TournamentCode, model.SeasonCode, model.StageCode, model.RegionCode, model.CountryKey));
+                    await _newSeasonRegistrationBus.SendEvent(BuildNewSeasonEvent(model.TournamentCode, model.SeasonCode, model.StageCode, model.RegionCode, model.CountryKey, model.Name));
                 }
                 else { Conflict($"The key '{model.Key}' already exists!"); }
                 if (dochange) await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
             }
         }
 
-        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
+        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode, string seasonname)
         {
             dynamic jsonpayload = new ExpandoObject();
             jsonpayload.TournamentCode = tournamentcode;
@@ -94,6 +94,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
             jsonpayload.StageCode = stagecode;
             jsonpayload.RegionCode = regioncode;
             jsonpayload.CountryCode = countrycode;
+            jsonpayload.SeasonName = seasonname;
             var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
             return new BusEventBase(payload);
         }

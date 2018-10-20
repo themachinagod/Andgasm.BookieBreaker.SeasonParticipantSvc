@@ -30,9 +30,6 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             //    _harvester.CookieString = init.RealisedCookie;
             //}
 
-            // DBr: temp scratch code line to manually test without bus!!
-            //await ProcessMessagesAsync(BuildNewSeasonEvent("2", "6335", "13786", "252", "gb-eng"), new CancellationToken());
-
             _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
             _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
