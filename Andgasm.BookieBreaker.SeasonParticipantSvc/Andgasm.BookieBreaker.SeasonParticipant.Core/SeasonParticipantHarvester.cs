@@ -95,7 +95,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             // TODO: hardwired accept string for now!!
             var url = CreateRequestUrl();
             var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", null,
-                                                            @"euconsent=BOVozhmOVozhmABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=3VHWR4OrQJ6JcpSUOUIzzJ40UlsBAAAAVUIPAAAAAACAaMiFAU1lv1DEH1MbjB042/jYOqYUG7V7; incap_ses_197_774904=JJddXBGQKXn3PIMs3eS7Ap8QxlsAAAAAf8t3QoOa9JJPMoXFyT3xuw==",
+                                                            CookieString,
                                                             null, false, false, false);
             var p = await _requestmanager.MakeRequest(url, ctx);
             if (p != null) LastModeKey = GetLastModeKey(p.DocumentNode.InnerText);

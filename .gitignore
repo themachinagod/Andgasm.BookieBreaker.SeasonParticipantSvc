@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Andgasm.BookieBreaker.SeasonParticipantSvc/Andgasm.BookieBreaker.SeasonParticipant/Properties/PublishProfiles/SeasonParticipantSvc-Extractor - Web Deploy.pubxml
+/Andgasm.BookieBreaker.SeasonParticipantSvc/Andgasm.BookieBreaker.SeasonParticipant/Settings.job
+/Andgasm.BookieBreaker.SeasonParticipantSvc/Andgasm.BookieBreaker.SeasonParticipant.API/Properties/PublishProfiles/SeasonParticipantSvcAPI - Web Deploy.pubxml

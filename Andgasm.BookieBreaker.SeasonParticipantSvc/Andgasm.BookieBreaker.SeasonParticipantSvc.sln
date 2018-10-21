@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc", "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc\Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc.csproj", "{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.API", "Andgasm.BookieBreaker.SeasonParticipant.API\Andgasm.BookieBreaker.SeasonParticipant.API.csproj", "{8DC5BAAB-0651-4FE0-A259-2EC1526ECAE9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SeasonParticipant.Core", "Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BookieBreaker.SeasonParticipant.Core.csproj", "{F0557CA2-3D9D-46FC-AD3C-81DB9C6A2452}"
@@ -20,16 +18,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E1B697-007C-45B3-91DC-14055A1DC693}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant", "Andgasm.BookieBreaker.SeasonParticipant\Andgasm.BookieBreaker.SeasonParticipant.csproj", "{CA05B4C9-0D0F-4394-B216-5AC7661521EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2ACB8990-C106-40EB-94A3-DD2DDAF2A668}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8DC5BAAB-0651-4FE0-A259-2EC1526ECAE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8DC5BAAB-0651-4FE0-A259-2EC1526ECAE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DC5BAAB-0651-4FE0-A259-2EC1526ECAE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,6 +42,10 @@ Global
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4445B0F9-532B-4692-B802-AAC61ED8F77E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA05B4C9-0D0F-4394-B216-5AC7661521EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA05B4C9-0D0F-4394-B216-5AC7661521EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA05B4C9-0D0F-4394-B216-5AC7661521EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA05B4C9-0D0F-4394-B216-5AC7661521EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

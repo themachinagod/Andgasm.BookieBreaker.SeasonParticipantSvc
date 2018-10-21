@@ -72,7 +72,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API
                     settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
                     settings.GeneratorSettings.DefaultEnumHandling = EnumHandling.String;
                 });
-                InitialiseData(app.ApplicationServices);
+                
             }
             else
             {
@@ -81,6 +81,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseMvc();
+            InitialiseData(app.ApplicationServices);
         }
 
         public static async void InitialiseData(IServiceProvider svcs)

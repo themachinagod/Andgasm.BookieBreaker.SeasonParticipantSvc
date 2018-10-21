@@ -1,4 +1,5 @@
-﻿using Andgasm.ServiceBus;
+﻿using Andgasm.BookieBreaker.Harvest.WhoScored;
+using Andgasm.ServiceBus;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -24,13 +25,8 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            //using (var init = new CookieInitialiser(FiddlerVersion.Fiddler2))
-            //{
-            //    init.Execute();
-            //    _harvester.CookieString = init.RealisedCookie;
-            //}
-
             _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
+            _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
             _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;

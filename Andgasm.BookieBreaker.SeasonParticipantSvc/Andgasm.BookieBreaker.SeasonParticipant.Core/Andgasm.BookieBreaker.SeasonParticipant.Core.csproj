@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.0.4" />
+    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.0.6" />
     <PackageReference Include="Andgasm.Http" Version="0.0.1" />
     <PackageReference Include="Andgasm.ServiceBus" Version="0.0.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.8.9" />
