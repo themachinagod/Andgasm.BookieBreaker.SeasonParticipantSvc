@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E1B697-007C-45B3-91DC-14055A1DC693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant", "Andgasm.BookieBreaker.SeasonParticipant\Andgasm.BookieBreaker.SeasonParticipant.csproj", "{CA05B4C9-0D0F-4394-B216-5AC7661521EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc", "Andgasm.BookieBreaker.SeasonParticipant\Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc.csproj", "{CA05B4C9-0D0F-4394-B216-5AC7661521EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
