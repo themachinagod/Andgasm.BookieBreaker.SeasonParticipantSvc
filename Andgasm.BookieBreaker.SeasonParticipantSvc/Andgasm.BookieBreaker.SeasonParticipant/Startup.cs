@@ -52,8 +52,8 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
                     };
                 });
 
-                services.AddLogging(loggingBuilder => loggingBuilder
-                    .AddConsole()
+            services.AddLogging(loggingBuilder => loggingBuilder
+                .AddConsole()
                     .SetMinimumLevel(LogLevel.Debug));
 
                 services.AddTransient(typeof(SeasonParticipantHarvester));

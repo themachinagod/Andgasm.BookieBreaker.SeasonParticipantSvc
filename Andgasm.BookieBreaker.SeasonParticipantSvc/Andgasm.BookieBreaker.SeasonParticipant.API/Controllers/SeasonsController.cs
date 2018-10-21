@@ -11,6 +11,7 @@ using System.Text;
 using System.Dynamic;
 using Newtonsoft.Json;
 using NSwag.Annotations;
+using System.Globalization;
 
 namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
 {
