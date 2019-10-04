@@ -21,7 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BookieBreaker.SeasonParticipant.Core.csproj" />
+    <ProjectReference Include="..\Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BB.SeasonParticipant.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Settings.job">

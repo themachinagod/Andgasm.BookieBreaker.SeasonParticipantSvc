@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BookieBreaker.SeasonParticipant.Core.csproj" />
+    <ProjectReference Include="..\Andgasm.BookieBreaker.SeasonParticipant.Core\Andgasm.BB.SeasonParticipant.Core.csproj" />
   </ItemGroup>
 
 </Project>
