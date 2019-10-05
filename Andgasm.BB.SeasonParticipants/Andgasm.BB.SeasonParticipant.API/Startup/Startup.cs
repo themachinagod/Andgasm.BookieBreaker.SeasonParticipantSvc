@@ -32,7 +32,7 @@ namespace Andgasm.BB.SeasonParticipant.API
             services.AddMvc(x => x.EnableEndpointRouting = false)
                     .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
-            services.AddSwaggerDocument();
+            //services.AddSwaggerDocument();
             services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
            
             services.AddTransient<Func<string, IBusClient>>(serviceProvider => key =>

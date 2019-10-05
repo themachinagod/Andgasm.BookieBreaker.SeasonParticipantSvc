@@ -10,7 +10,7 @@ using Andgasm.BB.SeasonParticipant.API.Models;
 using System.Text;
 using System.Dynamic;
 using Newtonsoft.Json;
-using NSwag.Annotations;
+//using NSwag.Annotations;
 using System.Globalization;
 
 namespace Andgasm.BB.SeasonParticipant.API.Controllers
@@ -29,8 +29,8 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
         }
 
         [HttpGet(Name = "GetAllSeasons")]
-        [SwaggerResponse(typeof(List<SeasonResource>), IsNullable = false,
-                         Description = "A collection of SeasonResources.")]
+        //[SwaggerResponse(typeof(List<SeasonResource>), IsNullable = false,
+        //                 Description = "A collection of SeasonResources.")]
         public async Task<IActionResult> GetAll()
         {
             var d = await  _context.Seasons.Select(x => new SeasonResource()
@@ -49,8 +49,8 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
         }
 
         [HttpPost(Name = "CreateSeason")]
-        [SwaggerResponse(typeof(SeasonResource), IsNullable = false,
-                         Description = "The successfully created Season.")]
+        //[SwaggerResponse(typeof(SeasonResource), IsNullable = false,
+        //                 Description = "The successfully created Season.")]
         public async Task<IActionResult> Create([FromBody]SeasonResource model)
         {
             try

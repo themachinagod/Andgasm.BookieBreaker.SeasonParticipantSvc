@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using NSwag.Annotations;
+//using NSwag.Annotations;
 
 namespace Andgasm.BB.SeasonParticipant.API.Controllers
 {
