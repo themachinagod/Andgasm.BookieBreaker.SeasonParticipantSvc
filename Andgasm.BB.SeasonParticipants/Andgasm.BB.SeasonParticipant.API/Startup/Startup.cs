@@ -61,8 +61,8 @@ namespace Andgasm.BB.SeasonParticipant.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseDeveloperExceptionPage();
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
+            //app.UseOpenApi();
+            //app.UseSwaggerUi3();
             app.UseHsts();
             
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
