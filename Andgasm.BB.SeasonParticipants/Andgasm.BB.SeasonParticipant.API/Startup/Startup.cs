@@ -1,6 +1,6 @@
 ﻿using System;
-using Andgasm.BookieBreaker.SeasonParticipant.API.Models;
-using Andgasm.BookieBreaker.SeasonParticipant.Core;
+using Andgasm.BB.SeasonParticipant.Core;
+using Andgasm.BB.SeasonParticipant.API.Models;
 using Andgasm.ServiceBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.API
+namespace Andgasm.BB.SeasonParticipant.API
 {
     public class Startup
     {

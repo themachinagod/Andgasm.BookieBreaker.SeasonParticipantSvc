@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using Andgasm.BookieBreaker.Models;
+using Andgasm.BB.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Andgasm.ServiceBus;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Andgasm.BookieBreaker.SeasonParticipant.API.Models;
+using Andgasm.BB.SeasonParticipant.API.Models;
 using System.Text;
 using System.Dynamic;
 using Newtonsoft.Json;
 using NSwag.Annotations;
 using System.Globalization;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
+namespace Andgasm.BB.SeasonParticipant.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,4 +1,4 @@
-﻿using Andgasm.BookieBreaker.Harvest.WhoScored;
+﻿using Andgasm.BB.Harvest;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.Core
+namespace Andgasm.BB.SeasonParticipant.Core
 {
     public class SeasonParticipantExtractorSvc : IHostedService
     {

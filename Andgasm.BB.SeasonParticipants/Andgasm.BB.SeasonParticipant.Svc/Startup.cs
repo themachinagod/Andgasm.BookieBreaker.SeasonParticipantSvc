@@ -1,5 +1,5 @@
-﻿using Andgasm.BookieBreaker.Harvest;
-using Andgasm.BookieBreaker.SeasonParticipant.Core;
+﻿using Andgasm.BB.Harvest;
+using Andgasm.BB.SeasonParticipant.Core;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
+namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
 {
     public class Startup
     {

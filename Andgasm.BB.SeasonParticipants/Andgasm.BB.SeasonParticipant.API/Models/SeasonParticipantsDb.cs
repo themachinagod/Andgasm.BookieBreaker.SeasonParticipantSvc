@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.API.Models
+namespace Andgasm.BB.SeasonParticipant.API.Models
 {
     public class SeasonParticipantsDb : DbContext
     {

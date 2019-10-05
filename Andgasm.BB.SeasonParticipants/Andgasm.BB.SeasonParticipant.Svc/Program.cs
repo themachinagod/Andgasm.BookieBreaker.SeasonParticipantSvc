@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Andgasm.BookieBreaker.SeasonParticipant.Core;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.Extractor.Svc
+namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
 {
     class Program
     {

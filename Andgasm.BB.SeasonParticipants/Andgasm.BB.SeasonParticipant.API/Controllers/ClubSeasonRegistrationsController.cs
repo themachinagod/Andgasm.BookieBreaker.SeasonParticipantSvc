@@ -4,8 +4,8 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Andgasm.BookieBreaker.SeasonParticipant.API.Models;
-using Andgasm.BookieBreaker.SeasonParticipant.API.Resources;
+using Andgasm.BB.SeasonParticipant.API.Models;
+using Andgasm.BB.SeasonParticipant.API.Resources;
 using Andgasm.ServiceBus;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NSwag.Annotations;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.API.Controllers
+namespace Andgasm.BB.SeasonParticipant.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

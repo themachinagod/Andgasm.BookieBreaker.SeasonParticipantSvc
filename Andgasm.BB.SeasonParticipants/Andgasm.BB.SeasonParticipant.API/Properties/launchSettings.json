@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Andgasm.BookieBreaker.SeasonParticipant.API": {
+    "Andgasm.BB.SeasonParticipant.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.API.Models
+namespace Andgasm.BB.SeasonParticipant.API.Models
 {
     public class Club
     {

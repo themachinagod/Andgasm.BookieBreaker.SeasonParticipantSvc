@@ -1,4 +1,4 @@
-﻿namespace Andgasm.BookieBreaker.SeasonParticipant.API.Resources
+﻿namespace Andgasm.BB.SeasonParticipant.API.Resources
 {
     public class ClubSeasonRegistrationResource
     {

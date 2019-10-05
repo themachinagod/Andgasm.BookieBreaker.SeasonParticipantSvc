@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
-using Andgasm.BookieBreaker.Global;
+using Andgasm.BB.Global;
 using HtmlAgilityPack;
-using Andgasm.BookieBreaker.Harvest;
+using Andgasm.BB.Harvest;
 using System.Dynamic;
 using Andgasm.Http;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.Core
+namespace Andgasm.BB.SeasonParticipant.Core
 {
     public class SeasonParticipantHarvester : DataHarvest
     {

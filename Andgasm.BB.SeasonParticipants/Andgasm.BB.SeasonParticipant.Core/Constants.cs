@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Andgasm.BookieBreaker.Global
+namespace Andgasm.BB.Global
 {
     public static class Constants
     {

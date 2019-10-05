@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.API
+namespace Andgasm.BB.SeasonParticipant.API
 {
     public class Program
     {

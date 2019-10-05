@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Andgasm.BookieBreaker.Models
+namespace Andgasm.BB.Models
 {
     public class SeasonResource
     {
