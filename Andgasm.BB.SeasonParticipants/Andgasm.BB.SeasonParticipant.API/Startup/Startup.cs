@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Andgasm.BookieBreaker.SeasonParticipant.API.Models;
 using Andgasm.BookieBreaker.SeasonParticipant.Core;
 using Andgasm.ServiceBus;
@@ -10,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NJsonSchema;
-using NSwag.AspNetCore;
 
 namespace Andgasm.BookieBreaker.SeasonParticipant.API
 {
@@ -27,13 +24,15 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
-            services.AddDbContext<SeasonParticipantsDb>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddLogging(loggingBuilder => loggingBuilder
+                                .AddConsole()
+                                .SetMinimumLevel(LogLevel.Debug));
+            services.AddDbContext<SeasonParticipantsDb>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(x => x.EnableEndpointRouting = false)
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
-            services.AddSwagger();
+            services.AddSwaggerDocument();
             services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
            
             services.AddTransient<Func<string, IBusClient>>(serviceProvider => key =>
@@ -60,19 +59,11 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerUi3WithApiExplorer(settings =>
-                {
-                    settings.GeneratorSettings.Title = "Season Participant Data Extractor Service";
-                    settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
-                    settings.GeneratorSettings.DefaultEnumHandling = EnumHandling.String;
-                });
-                
+                app.UseOpenApi();
+                app.UseSwaggerUi3();
             }
             else
             {
