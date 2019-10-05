@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Andgasm.BB.SeasonParticipant.API
-{
+{//
     public class Startup
     {
         public Startup(IConfiguration configuration)
