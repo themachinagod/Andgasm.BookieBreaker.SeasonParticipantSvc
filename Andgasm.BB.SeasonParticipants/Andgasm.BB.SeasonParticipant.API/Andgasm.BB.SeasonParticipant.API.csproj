@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>0c594f5c-eeb0-404b-a2d9-bd1acf300e80</UserSecretsId>
   </PropertyGroup>
 
@@ -10,12 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Andgasm.ServiceBus" Version="0.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Andgasm.BB.SeasonParticipant.Core\Andgasm.BB.SeasonParticipant.Core.csproj" />
+    <PackageReference Include="Andgasm.ServiceBus" Version="0.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
