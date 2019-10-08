@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using NSwag.Annotations;
 
 namespace Andgasm.BB.SeasonParticipant.API.Controllers
-{//
+{
     [Route("api/[controller]")]
     [ApiController]
     public class SeasonsController : Controller
