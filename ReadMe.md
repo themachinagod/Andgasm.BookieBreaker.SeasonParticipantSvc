@@ -35,4 +35,4 @@
 		<li>Season Participants Extration Svc - responsible for parsing and extracting season participant data</li>
 	</ul>
 </p>
-<p><b>Requires Asp.Net Core 2.1</b></p>
+<p><b>Requires Asp.Net Core 2.2</b></p>
