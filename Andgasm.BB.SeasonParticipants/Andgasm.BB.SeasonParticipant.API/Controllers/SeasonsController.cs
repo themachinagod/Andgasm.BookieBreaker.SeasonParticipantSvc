@@ -35,7 +35,7 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
         {
             var d = await  _context.Seasons.Select(x => new SeasonResource()
             {
-                Name = x.Name,
+                Name = "DANNYWINS",
                 TournamentKey = x.TournamentKey,
                 CountryKey = x.CountryKey,
                 StartDate = x.StartDate,
