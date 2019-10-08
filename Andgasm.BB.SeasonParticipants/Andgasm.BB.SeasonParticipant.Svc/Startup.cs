@@ -10,7 +10,7 @@ using System;
 namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
 {
     public class Startup
-    {
+    {//
         public IHostBuilder Host {get; internal set;}
         public IConfiguration Configuration { get; internal set; }
 
