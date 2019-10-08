@@ -3,7 +3,6 @@ using Andgasm.BB.SeasonParticipant.Core;
 using Andgasm.BB.SeasonParticipant.API.Models;
 using Andgasm.ServiceBus;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +29,7 @@ namespace Andgasm.BB.SeasonParticipant.API
             services.AddDbContext<SeasonParticipantsDb>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc(x => x.EnableEndpointRouting = false)
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
             //services.AddSwaggerDocument();
             services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
@@ -58,7 +57,7 @@ namespace Andgasm.BB.SeasonParticipant.API
 
         //
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
             //app.UseOpenApi();

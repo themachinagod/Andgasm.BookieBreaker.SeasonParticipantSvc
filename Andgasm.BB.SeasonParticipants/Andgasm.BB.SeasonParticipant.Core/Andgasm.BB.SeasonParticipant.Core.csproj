@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.0.8" />
-    <PackageReference Include="Andgasm.ServiceBus" Version="0.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.0.11" />
+    <PackageReference Include="Andgasm.Http" Version="0.0.2" />
+    <PackageReference Include="Andgasm.ServiceBus" Version="0.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

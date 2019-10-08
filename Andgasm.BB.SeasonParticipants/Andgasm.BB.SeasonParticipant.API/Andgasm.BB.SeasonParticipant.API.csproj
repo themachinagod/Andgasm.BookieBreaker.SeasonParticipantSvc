@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Andgasm.BB.SeasonParticipant.Core\Andgasm.BB.SeasonParticipant.Core.csproj" />
+  </ItemGroup>
+
 </Project>
