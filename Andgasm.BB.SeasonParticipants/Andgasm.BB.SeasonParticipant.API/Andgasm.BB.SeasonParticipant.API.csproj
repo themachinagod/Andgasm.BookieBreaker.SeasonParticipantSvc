@@ -13,6 +13,7 @@
     <PackageReference Include="Andgasm.ServiceBus" Version="0.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.1.2" />
   </ItemGroup>
 
   <ItemGroup>

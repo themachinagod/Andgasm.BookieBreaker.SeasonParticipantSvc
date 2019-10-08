@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Andgasm.BB.SeasonParticipant.API
-{//
+{
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -31,7 +31,7 @@ namespace Andgasm.BB.SeasonParticipant.API
             services.AddMvc(x => x.EnableEndpointRouting = false)
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
-            //services.AddSwaggerDocument();
+            services.AddSwaggerDocument();
             services.Configure<BusSettings>(Configuration.GetSection("ServiceBus"));
            
             services.AddTransient<Func<string, IBusClient>>(serviceProvider => key =>
@@ -60,8 +60,8 @@ namespace Andgasm.BB.SeasonParticipant.API
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
-            //app.UseOpenApi();
-            //app.UseSwaggerUi3();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             app.UseHsts();
             
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
