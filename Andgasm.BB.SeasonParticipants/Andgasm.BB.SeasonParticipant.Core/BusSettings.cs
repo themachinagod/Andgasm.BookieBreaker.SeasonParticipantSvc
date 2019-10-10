@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Andgasm.BB.SeasonParticipant.Core
+﻿namespace Andgasm.BB.SeasonParticipant.Core
 {
     public class BusSettings
     {
@@ -14,11 +10,5 @@ namespace Andgasm.BB.SeasonParticipant.Core
 
         public string NewSeasonTopicName { get; set; }
         public string NewSeasonSubscriptionName { get; set; }
-    }
-
-    public class ApiSettings
-    {
-        public string SeasonsDbApiRootKey { get; set; }
-        public string ClubSeasonRegistrationsApiPath { get; set; }
     }
 }
