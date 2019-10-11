@@ -3,6 +3,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>f449abe3-3a84-4d02-b483-a61494423b1d</UserSecretsId>
+    <Authors>Danny Brown</Authors>
+    <Company>Andgasm</Company>
+    <RepositoryUrl>https://github.com/themachinagod/Andgasm.BookieBreaker.SeasonParticipantSvc</RepositoryUrl>
+    <Description>The BookieBreaker Season Participants Extrator Service is responsible for parsing Seasons, Clubs and Club Season Participation data utilising the Season Participants API and BookieBreaker Service Bus. This service will respond to events for new seasons.</Description>
+    <Copyright>Andgasm Software Solutions</Copyright>
+    <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />

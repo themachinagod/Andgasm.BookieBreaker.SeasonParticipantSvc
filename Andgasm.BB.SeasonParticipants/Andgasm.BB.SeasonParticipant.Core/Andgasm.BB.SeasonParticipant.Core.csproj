@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Authors>Danny Brown</Authors>
+    <Company>Andgasm</Company>
+    <Description>The BookieBreaker Season Participants Core library provides implementations for extration and store of season participant data.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/themachinagod/Andgasm.BookieBreaker.SeasonParticipantSvc</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <Copyright>Andgasm Software Solutions</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
