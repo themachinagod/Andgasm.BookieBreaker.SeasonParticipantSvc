@@ -4,12 +4,14 @@
 
 <p>
 	The BookieBreaker software stack is broken into two categories;
+</p>
 
-	<ul>
-		<li>Data Extraction - series of scalable micro services that will scrape data from WhoScored.coms data feeds</li>
-		<li>Data Utilisation - series of applications that make use of the acquired data via REST API's</li>
-	</ul>
+<ul>
+	<li>Data Extraction - series of scalable micro services that will scrape data from WhoScored.coms data feeds</li>
+	<li>Data Utilisation - series of applications that make use of the acquired data via REST API's</li>
+</ul>
 
+<p>
 	WhoScored.com has a wealth of information available for seasons, clubs, players, fixtures & match statistics.
 	All data extraction services will communicate via an Azure Service Bus event pipeline.
 	Note that all data extration services have request throttling to ensure that the endpoints don't spam the server.
@@ -54,11 +56,11 @@
 
 <p>
 	The Service consists of the following components:
-	
-	<ul>
-		<li>Season Participants API - responsible for managing season participant data interactions with the underlying data container</li>
-		<li>Season Participants Extration Svc - responsible for parsing and extracting season participant data</li>
-	</ul>
 </p>
+
+<ul>
+	<li>Season Participants API - responsible for managing season participant data interactions with the underlying data container</li>
+	<li>Season Participants Extration Svc - responsible for parsing and extracting season participant data</li>
+</ul>
 
 <p><b>Requires Asp.Net Core 2.2</b></p>
