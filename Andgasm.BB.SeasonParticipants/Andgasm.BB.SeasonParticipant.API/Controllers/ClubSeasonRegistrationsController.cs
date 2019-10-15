@@ -44,29 +44,29 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
                 bool dochange = false;
                 foreach (var r in resources)
                 {
-                    if (!_context.Clubs.Any(x => x.Key == r.ClubCode)) 
+                    if (!_context.Clubs.Any(x => x.Key == r.ClubKey)) 
                     {
                         dochange = true;
                         var club = new Club()
                         {
-                            Key = r.ClubCode,
+                            Key = r.ClubKey,
                             Name = r.ClubName,
                             NickName = r.ClubNickName,
-                            CountryKey = r.CountryCode,
+                            CountryKey = r.CountryKey,
                             StadiumName = r.StadiumName,
                         };
                         _context.Clubs.Add(club);
                     }
-                    if (!_context.ClubSeasonAssociations.Any(x => x.ClubKey == r.ClubCode && x.SeasonKey == r.SeasonCode))
+                    if (!_context.ClubSeasonAssociations.Any(x => x.ClubKey == r.ClubKey && x.SeasonKey == r.SeasonKey))
                     {
                         dochange = true;
                         var association = new ClubSeasonAssociation()
                         {
-                            ClubKey = r.ClubCode,
-                            SeasonKey = r.SeasonCode
+                            ClubKey = r.ClubKey,
+                            SeasonKey = r.SeasonKey
                         };
                         _context.ClubSeasonAssociations.Add(association);
-                        await _newClubSeasonRegistrationBus.SendEvent(BuildNewClubSeasonAssociationEvent(r.ClubCode, r.StageCode, r.SeasonCode));
+                        await _newClubSeasonRegistrationBus.SendEvent(BuildNewClubSeasonAssociationEvent(r.ClubKey, r.StageKey, r.SeasonKey));
                     }
                 }
                 if (dochange) await _context.SaveChangesAsync();
@@ -83,9 +83,9 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
         static BusEventBase BuildNewClubSeasonAssociationEvent(string clubcode, string stagecode, string seasoncode)
         {
             dynamic jsonpayload = new ExpandoObject();
-            jsonpayload.SeasonCode = seasoncode;
-            jsonpayload.StageCode = stagecode;
-            jsonpayload.ClubCode = clubcode;
+            jsonpayload.SeasonKey = seasoncode;
+            jsonpayload.StageKey = stagecode;
+            jsonpayload.ClubKey = clubcode;
             var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
             return new BusEventBase(payload);
         }
