@@ -35,14 +35,15 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
             var d = await  _context.Seasons.Select(x => new SeasonResource()
             {
                 Name = x.Name,
-                TournamentKey = x.TournamentKey,
-                CountryKey = x.CountryKey,
+                TournamentName = x.TournamentName,
                 StartDate = x.StartDate,
                 EndDate = x.EndDate,
-                RegionCode = x.RegionCode,
-                TournamentCode = x.TournamentCode,
-                SeasonCode = x.SeasonCode,
-                StageCode = x.StageCode
+
+                CountryKey = x.CountryKey,
+                TournamentKey = x.TournamentKey,
+                RegionKey = x.RegionKey,
+                SeasonKey = x.Key,
+                StageKey = x.StageKey
             }).ToListAsync();
             return Ok(d);
         }
@@ -55,26 +56,26 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
             try
             {
                 bool dochange = false;
-                if (!_context.Seasons.Any(x => x.Key == model.Key))
+                if (!_context.Seasons.Any(x => x.Key == model.SeasonKey))
                 {
                     dochange = true;
                     var season = new Season()
                     {
-                        Key = model.Key,
+                        Key = model.SeasonKey,
                         Name = model.Name,
-                        TournamentKey = model.TournamentKey,
-                        CountryKey = model.CountryKey,
+                        TournamentName = model.TournamentName,
                         StartDate = model.StartDate,
                         EndDate = model.EndDate,
-                        RegionCode = model.RegionCode,
-                        TournamentCode = model.TournamentCode,
-                        SeasonCode = model.SeasonCode,
-                        StageCode = model.StageCode
+
+                        TournamentKey = model.TournamentKey,
+                        CountryKey = model.CountryKey,
+                        RegionKey = model.RegionKey,
+                        StageKey = model.StageKey
                     };
                     _context.Seasons.Add(season);
-                    await _newSeasonRegistrationBus.SendEvent(BuildNewSeasonEvent(model.TournamentCode, model.SeasonCode, model.StageCode, model.RegionCode, model.CountryKey, model.Name));
+                    await _newSeasonRegistrationBus.SendEvent(BuildNewSeasonEvent(model.TournamentKey, model.SeasonKey, model.StageKey, model.RegionKey, model.CountryKey, model.Name));
                 }
-                else { Conflict($"The key '{model.Key}' already exists!"); }
+                else { Conflict($"The key '{model.SeasonKey}' already exists!"); }
                 if (dochange) await _context.SaveChangesAsync();
                 return Ok(model); 
             }
@@ -89,11 +90,11 @@ namespace Andgasm.BB.SeasonParticipant.API.Controllers
         public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode, string seasonname)
         {
             dynamic jsonpayload = new ExpandoObject();
-            jsonpayload.TournamentCode = tournamentcode;
-            jsonpayload.SeasonCode = seasoncode;
-            jsonpayload.StageCode = stagecode;
-            jsonpayload.RegionCode = regioncode;
-            jsonpayload.CountryCode = countrycode;
+            jsonpayload.TournamentKey = tournamentcode;
+            jsonpayload.SeasonKey = seasoncode;
+            jsonpayload.StageKey = stagecode;
+            jsonpayload.RegionKey = regioncode;
+            jsonpayload.CountryKey = countrycode;
             jsonpayload.SeasonName = seasonname;
             var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
             return new BusEventBase(payload);

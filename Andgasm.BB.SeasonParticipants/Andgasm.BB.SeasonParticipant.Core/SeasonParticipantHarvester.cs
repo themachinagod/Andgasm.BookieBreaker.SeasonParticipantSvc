@@ -27,11 +27,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
         #endregion
 
         #region Properties
-        public string StageCode { get; set; }
-        public string SeasonCode { get; set; }
-        public string TournamentCode { get; set; }
-        public string RegionCode { get; set; }
-        public string CountryCode { get; set; }
+        public string StageKey { get; set; }
+        public string SeasonKey { get; set; }
+        public string TournamentKey { get; set; }
+        public string RegionKey { get; set; }
+        public string CountryKey { get; set; }
         #endregion
 
         #region Contructors
@@ -50,11 +50,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
         public override bool CanExecute()
         {
             if (!base.CanExecute()) return false;
-            if (string.IsNullOrWhiteSpace(StageCode)) return false;
-            if (string.IsNullOrWhiteSpace(SeasonCode)) return false;
-            if (string.IsNullOrWhiteSpace(TournamentCode)) return false;
-            if (string.IsNullOrWhiteSpace(RegionCode)) return false;
-            if (string.IsNullOrWhiteSpace(CountryCode)) return false;
+            if (string.IsNullOrWhiteSpace(StageKey)) return false;
+            if (string.IsNullOrWhiteSpace(SeasonKey)) return false;
+            if (string.IsNullOrWhiteSpace(TournamentKey)) return false;
+            if (string.IsNullOrWhiteSpace(RegionKey)) return false;
+            if (string.IsNullOrWhiteSpace(CountryKey)) return false;
             return true;
         }
 
@@ -72,11 +72,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
                         clubs.Add(CreateSeasonParticipant(cr));
                     }                   
                     await HttpRequestFactory.Post(clubs, _participantsapiroot, _registrationsApiPath); // TODO: handle success/fail
-                    _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonCode));
+                    _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonKey));
                 }
                 else
                 {
-                    _logger.LogDebug(string.Format("Failed to store & commit club registations for season '{0}'", SeasonCode));
+                    _logger.LogDebug(string.Format("Failed to store & commit club registations for season '{0}'", SeasonKey));
                 }
                 HarvestHelper.FinaliseTimer(_timer);
             }
@@ -86,7 +86,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
         #region Request Helpers
         private string CreateRequestUrl()
         {
-            return string.Format(WhoScoredConstants.SeasonsUrl, RegionCode, TournamentCode, SeasonCode);
+            return string.Format(WhoScoredConstants.SeasonsUrl, RegionKey, TournamentKey, SeasonKey);
         }
 
         private async Task<HtmlDocument> ExecuteRequest()
@@ -117,11 +117,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
         private ExpandoObject CreateSeasonParticipant(JToken clubdata)
         {
             dynamic registration = new ExpandoObject();
-            registration.ClubCode = clubdata[teamIdIndex].ToString();
+            registration.ClubKey = clubdata[teamIdIndex].ToString();
             registration.ClubName = clubdata[teamNameIndex].ToString();
-            registration.CountryCode = CountryCode;
-            registration.SeasonCode = SeasonCode;
-            registration.StageCode = StageCode;
+            registration.CountryKey = CountryKey;
+            registration.SeasonKey = SeasonKey;
+            registration.StageKey = StageKey;
             return registration;
         }
         #endregion

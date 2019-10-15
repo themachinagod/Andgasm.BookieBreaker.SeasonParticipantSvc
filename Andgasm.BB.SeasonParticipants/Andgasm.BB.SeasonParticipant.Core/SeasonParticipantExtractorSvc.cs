@@ -45,11 +45,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
             _logger.LogDebug($"Received message: Body:{payload}");
 
             dynamic payloadvalues = JsonConvert.DeserializeObject<ExpandoObject>(payload);
-            _harvester.TournamentCode = payloadvalues.TournamentCode;
-            _harvester.SeasonCode = payloadvalues.SeasonCode;
-            _harvester.StageCode = payloadvalues.StageCode;
-            _harvester.RegionCode = payloadvalues.RegionCode;
-            _harvester.CountryCode = payloadvalues.CountryCode;
+            _harvester.TournamentKey = payloadvalues.TournamentKey;
+            _harvester.SeasonKey = payloadvalues.SeasonKey;
+            _harvester.StageKey = payloadvalues.StageKey;
+            _harvester.RegionKey = payloadvalues.RegionKey;
+            _harvester.CountryKey = payloadvalues.CountryKey;
             await _harvester.Execute();
             await _newseasonBus.CompleteEvent(message.LockToken);
         }
@@ -69,11 +69,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
         public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
         {
             dynamic jsonpayload = new ExpandoObject();
-            jsonpayload.TournamentCode = tournamentcode;
-            jsonpayload.SeasonCode = seasoncode;
-            jsonpayload.StageCode = stagecode;
-            jsonpayload.RegionCode = regioncode;
-            jsonpayload.CountryCode = countrycode;
+            jsonpayload.TournamentKey = tournamentcode;
+            jsonpayload.SeasonKey = seasoncode;
+            jsonpayload.StageKey = stagecode;
+            jsonpayload.RegionKey = regioncode;
+            jsonpayload.CountryKey = countrycode;
             var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
             return new BusEventBase(payload);
         }
