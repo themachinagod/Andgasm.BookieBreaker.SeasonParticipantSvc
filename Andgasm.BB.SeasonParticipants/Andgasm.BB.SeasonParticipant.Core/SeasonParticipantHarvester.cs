@@ -9,6 +9,7 @@ using Andgasm.BB.Harvest;
 using System.Dynamic;
 using Andgasm.Http;
 using Andgasm.BB.Harvest.Interfaces;
+using Andgasm.Http.Interfaces;
 
 namespace Andgasm.BB.SeasonParticipant.Core
 {
@@ -25,6 +26,8 @@ namespace Andgasm.BB.SeasonParticipant.Core
 
         string _participantsapiroot;
         string _registrationsApiPath;
+
+        IHttpRequestManager _httpmanager;
         #endregion
 
         #region Properties
@@ -36,10 +39,11 @@ namespace Andgasm.BB.SeasonParticipant.Core
         #endregion
 
         #region Contructors
-        public SeasonParticipantHarvester(ApiSettings settings, ILogger<SeasonParticipantHarvester> logger, IHarvestRequestManager requestmanager)
+        public SeasonParticipantHarvester(ApiSettings settings, ILogger<SeasonParticipantHarvester> logger, IHarvestRequestManager harvestrequestmanager, IHttpRequestManager httpmanager)
         {
             _logger = logger;
-            _requestmanager = requestmanager;
+            _requestmanager = harvestrequestmanager;
+            _httpmanager = httpmanager;
 
             _participantsapiroot = settings.SeasonsDbApiRootKey;
             _registrationsApiPath = settings.ClubSeasonRegistrationsApiPath;
@@ -72,7 +76,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
                     {
                         clubs.Add(CreateSeasonParticipant(cr));
                     }                   
-                    await HttpRequestFactory.Post(clubs, _participantsapiroot, _registrationsApiPath); // TODO: handle success/fail
+                    await _httpmanager.Post(clubs, _participantsapiroot, _registrationsApiPath); // TODO: handle success/fail
                     _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonKey));
                 }
                 else

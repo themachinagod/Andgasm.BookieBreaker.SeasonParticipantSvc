@@ -1,4 +1,5 @@
 ﻿using Andgasm.BB.Harvest;
+using Andgasm.BB.Harvest.Interfaces;
 using Andgasm.BB.SeasonParticipant.Core;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Configuration;
@@ -56,7 +57,7 @@ namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
                     .SetMinimumLevel(LogLevel.Debug));
 
                 services.AddTransient(typeof(SeasonParticipantHarvester));
-                services.AddSingleton((ctx) =>
+                services.AddSingleton<IHarvestRequestManager>((ctx) =>
                 {
                     return new HarvestRequestManager(ctx.GetService<ILogger<HarvestRequestManager>>(), 
                                                      Convert.ToInt32(Configuration["MaxRequestsPerSecond"]));
