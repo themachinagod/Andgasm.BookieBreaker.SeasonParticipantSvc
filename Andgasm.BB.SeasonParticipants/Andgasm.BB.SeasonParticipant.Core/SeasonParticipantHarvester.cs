@@ -8,6 +8,7 @@ using HtmlAgilityPack;
 using Andgasm.BB.Harvest;
 using System.Dynamic;
 using Andgasm.Http;
+using Andgasm.BB.Harvest.Interfaces;
 
 namespace Andgasm.BB.SeasonParticipant.Core
 {
@@ -35,7 +36,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
         #endregion
 
         #region Contructors
-        public SeasonParticipantHarvester(ApiSettings settings, ILogger<SeasonParticipantHarvester> logger, HarvestRequestManager requestmanager)
+        public SeasonParticipantHarvester(ApiSettings settings, ILogger<SeasonParticipantHarvester> logger, IHarvestRequestManager requestmanager)
         {
             _logger = logger;
             _requestmanager = requestmanager;
@@ -63,7 +64,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
             if (CanExecute())
             {
                 _timer.Start();
-                HtmlDocument responsedoc = await ExecuteRequest();
+                IHarvestRequestResult responsedoc = await ExecuteRequest();
                 if (responsedoc != null)
                 {
                     var clubs = new List<ExpandoObject>();
@@ -89,7 +90,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
             return string.Format(WhoScoredConstants.SeasonsUrl, RegionKey, TournamentKey, SeasonKey);
         }
 
-        private async Task<HtmlDocument> ExecuteRequest()
+        private async Task<IHarvestRequestResult> ExecuteRequest()
         {
             // TODO: hardwired cookie for now!!
             // TODO: hardwired accept string for now!!
@@ -98,15 +99,15 @@ namespace Andgasm.BB.SeasonParticipant.Core
                                                             CookieString,
                                                             null, false, false, false);
             var p = await _requestmanager.MakeRequest(url, ctx);
-            if (p != null) LastModeKey = GetLastModeKey(p.DocumentNode.InnerText);
+            if (p != null) LastModeKey = GetLastModeKey(p.InnerText);
             return p;
         }
         #endregion
 
         #region Entity Creation Helpers
-        private JArray ParseClubsFromResponse(HtmlDocument response)
+        private JArray ParseClubsFromResponse(IHarvestRequestResult response)
         {
-            var rawdata = response.DocumentNode.InnerHtml;
+            var rawdata = response.InnerHtml;
             int jsonstartindex = rawdata.IndexOf("DataStore.prime('standings',") + 28;
             int jsonendindex = rawdata.IndexOf("]);", jsonstartindex) + 1;
             var rawjson = "[" + rawdata.Substring(jsonstartindex, jsonendindex - jsonstartindex) + "]";
