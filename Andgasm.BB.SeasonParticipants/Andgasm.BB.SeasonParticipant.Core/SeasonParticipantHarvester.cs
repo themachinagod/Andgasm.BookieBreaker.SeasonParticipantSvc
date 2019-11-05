@@ -8,10 +8,11 @@ using Andgasm.BB.Harvest;
 using System.Dynamic;
 using Andgasm.BB.Harvest.Interfaces;
 using Andgasm.Http.Interfaces;
+using Andgasm.BB.SeasonParticipant.Interfaces;
 
 namespace Andgasm.BB.SeasonParticipant.Core
 {
-    public class SeasonParticipantHarvester : DataHarvest
+    public class SeasonParticipantHarvester : DataHarvest, ISeasonParticipantHarvester
     {
         #region Constants
         const int teamNameIndex = 2;
