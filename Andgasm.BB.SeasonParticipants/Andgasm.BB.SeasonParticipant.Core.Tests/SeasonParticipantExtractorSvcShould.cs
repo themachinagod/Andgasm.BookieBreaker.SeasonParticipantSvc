@@ -48,6 +48,8 @@ namespace Andgasm.BB.SeasonParticipant.Core.Tests
         [TestMethod]
         public async Task ProcessValidMessage_Successfully()
         {
+            var h = new Mock<ISeasonParticipantHarvester>();
+
             var seasonevent = BuildNewSeasonEvent("testtc", "testsc", "testsc", "testrc", "testcc");
             await SeasonParticipantExtractorSvc.ProcessMessagesAsync(seasonevent, new CancellationToken());
 
