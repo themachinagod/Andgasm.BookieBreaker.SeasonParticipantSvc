@@ -1,6 +1,9 @@
 ﻿using Andgasm.BB.Harvest;
 using Andgasm.BB.Harvest.Interfaces;
 using Andgasm.BB.SeasonParticipant.Core;
+using Andgasm.BB.SeasonParticipant.Interfaces;
+using Andgasm.Http;
+using Andgasm.Http.Interfaces;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +14,7 @@ using System;
 namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
 {
     public class Startup
-    {//
+    {
         public IHostBuilder Host {get; internal set;}
         public IConfiguration Configuration { get; internal set; }
 
@@ -23,7 +26,6 @@ namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
                 config.SetBasePath(Environment.CurrentDirectory);
                 config.AddJsonFile("appsettings.json", optional: false);
                 config.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
-                //config.AddUserSecrets<Startup>(); // only do if in development mode
                 Configuration = config.Build();
             });
             ConfigureServices();
@@ -52,18 +54,19 @@ namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
                     };
                 });
 
-            services.AddLogging(loggingBuilder => loggingBuilder
+                services.AddLogging(loggingBuilder => loggingBuilder
                 .AddConsole()
                     .SetMinimumLevel(LogLevel.Debug));
 
-                services.AddTransient(typeof(SeasonParticipantHarvester));
+                services.AddTransient<IHttpRequestManager, HttpRequestManager>();
+                services.AddTransient<ICookieInitialiser, CookieInitialiser>();
+                services.AddTransient<ISeasonParticipantHarvester, SeasonParticipantHarvester>();
                 services.AddSingleton<IHarvestRequestManager>((ctx) =>
                 {
                     return new HarvestRequestManager(ctx.GetService<ILogger<HarvestRequestManager>>(), 
                                                      Convert.ToInt32(Configuration["MaxRequestsPerSecond"]));
                 });
                 
-
                 services.AddSingleton(sp =>
                 {
                     return ServiceBusFactory.GetBus(Enum.Parse<BusHost>(Configuration.GetSection("ServiceBus")["ServiceBusHost"]),
@@ -73,8 +76,6 @@ namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
                 });
 
                 services.AddScoped<IHostedService, SeasonParticipantExtractorSvc>();
-
-
             });
         }
     }

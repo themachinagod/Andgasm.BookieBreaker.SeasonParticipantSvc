@@ -4,16 +4,15 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Andgasm.BB.Global;
-using HtmlAgilityPack;
 using Andgasm.BB.Harvest;
 using System.Dynamic;
-using Andgasm.Http;
 using Andgasm.BB.Harvest.Interfaces;
 using Andgasm.Http.Interfaces;
+using Andgasm.BB.SeasonParticipant.Interfaces;
 
 namespace Andgasm.BB.SeasonParticipant.Core
 {
-    public class SeasonParticipantHarvester : DataHarvest
+    public class SeasonParticipantHarvester : DataHarvest, ISeasonParticipantHarvester
     {
         #region Constants
         const int teamNameIndex = 2;
@@ -81,7 +80,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
                 }
                 else
                 {
-                    _logger.LogDebug(string.Format("Failed to store & commit club registations for season '{0}'", SeasonKey));
+                    _logger.LogDebug(string.Format("Failed to store & commit club registations for season as no response was recieved from endpoint: '{0}'", SeasonKey));
                 }
                 HarvestHelper.FinaliseTimer(_timer);
             }
@@ -96,7 +95,6 @@ namespace Andgasm.BB.SeasonParticipant.Core
 
         private async Task<IHarvestRequestResult> ExecuteRequest()
         {
-            // TODO: hardwired cookie for now!!
             // TODO: hardwired accept string for now!!
             var url = CreateRequestUrl();
             var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", null,

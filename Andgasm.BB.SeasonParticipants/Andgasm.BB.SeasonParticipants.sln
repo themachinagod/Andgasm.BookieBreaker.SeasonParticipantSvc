@@ -18,7 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07E1B697
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SeasonParticipant.Svc", "Andgasm.BB.SeasonParticipant.Svc\Andgasm.BB.SeasonParticipant.Svc.csproj", "{CA05B4C9-0D0F-4394-B216-5AC7661521EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BB.SeasonParticipant.Core.Tests", "Andgasm.BB.SeasonParticipant.Core.Tests\Andgasm.BB.SeasonParticipant.Core.Tests.csproj", "{8F072392-9AD7-47A3-8006-293EB00C4160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SeasonParticipant.Core.Tests", "Andgasm.BB.SeasonParticipant.Core.Tests\Andgasm.BB.SeasonParticipant.Core.Tests.csproj", "{8F072392-9AD7-47A3-8006-293EB00C4160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BB.SeasonParticipant.Interfaces", "Andgasm.BB.SeasonParticipant.Interfaces\Andgasm.BB.SeasonParticipant.Interfaces.csproj", "{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{8F072392-9AD7-47A3-8006-293EB00C4160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F072392-9AD7-47A3-8006-293EB00C4160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F072392-9AD7-47A3-8006-293EB00C4160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

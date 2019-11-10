@@ -1,4 +1,5 @@
 ﻿using Andgasm.BB.Harvest;
+using Andgasm.BB.SeasonParticipant.Interfaces;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,20 +14,22 @@ namespace Andgasm.BB.SeasonParticipant.Core
     public class SeasonParticipantExtractorSvc : IHostedService
     {
         static ILogger<SeasonParticipantExtractorSvc> _logger;
-        static SeasonParticipantHarvester _harvester;
+        static ISeasonParticipantHarvester _harvester;
         static IBusClient _newseasonBus;
+        static ICookieInitialiser _cookiesvc;
 
-        public SeasonParticipantExtractorSvc(ILogger<SeasonParticipantExtractorSvc> logger, SeasonParticipantHarvester harvester, IBusClient newseasonClient)
+        public SeasonParticipantExtractorSvc(ILogger<SeasonParticipantExtractorSvc> logger, ISeasonParticipantHarvester harvester, IBusClient newseasonClient, ICookieInitialiser cookieinit)
         {
             _harvester = harvester;
             _logger = logger;
             _newseasonBus = newseasonClient;
+            _cookiesvc = cookieinit;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
-            _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
+            _harvester.CookieString = await _cookiesvc.GetCookieFromRootDirectives();
             _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;
@@ -39,7 +42,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
             _logger.LogDebug("SeasonParticipantExtractorSvc.Svc has successfully shut down...");
         }
 
-        static async Task ProcessMessagesAsync(IBusEvent message, CancellationToken c)
+        public static async Task ProcessMessagesAsync(IBusEvent message, CancellationToken c)
         {
             var payload = Encoding.UTF8.GetString(message.Body);
             _logger.LogDebug($"Received message: Body:{payload}");
@@ -54,7 +57,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
             await _newseasonBus.CompleteEvent(message.LockToken);
         }
 
-        static Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
+        public static Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
         {
             _logger.LogDebug($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
             var context = exceptionReceivedEventArgs.Exception;
@@ -63,19 +66,6 @@ namespace Andgasm.BB.SeasonParticipant.Core
             _logger.LogDebug($"- Stack: {context.StackTrace}");
             _logger.LogDebug($"- Source: {context.Source}");
             return Task.CompletedTask;
-        }
-
-        // scratch code to manually invoke new season - invoke from startasync to debug without bus
-        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
-        {
-            dynamic jsonpayload = new ExpandoObject();
-            jsonpayload.TournamentKey = tournamentcode;
-            jsonpayload.SeasonKey = seasoncode;
-            jsonpayload.StageKey = stagecode;
-            jsonpayload.RegionKey = regioncode;
-            jsonpayload.CountryKey = countrycode;
-            var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
-            return new BusEventBase(payload);
         }
     }
 }
