@@ -30,8 +30,8 @@ namespace Andgasm.BB.SeasonParticipant.Core
         {
             _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
             _harvester.CookieString = await _cookiesvc.GetCookieFromRootDirectives();
-            //_newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
-            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "7361", "16368", "252", "gb-eng"), new CancellationToken());
+            _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            //await ProcessMessagesAsync(BuildNewSeasonEvent("2", "7361", "16368", "252", "gb-eng"), new CancellationToken());
             _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;
         }
