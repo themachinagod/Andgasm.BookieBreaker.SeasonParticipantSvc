@@ -60,6 +60,7 @@ namespace Andgasm.BB.SeasonParticipant.Core.Tests
         [TestMethod]
         public async Task ProcessFailedMessage_Successfully()
         {
+            // TODO: fails due to logger statics!!
             await SeasonParticipantExtractorSvc.ExceptionReceivedHandler(new ExceptionArgsBase(new Exception()));
         }
 

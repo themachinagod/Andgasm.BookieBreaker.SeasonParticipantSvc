@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SeasonParticipan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SeasonParticipant.Core.Tests", "Andgasm.BB.SeasonParticipant.Core.Tests\Andgasm.BB.SeasonParticipant.Core.Tests.csproj", "{8F072392-9AD7-47A3-8006-293EB00C4160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andgasm.BB.SeasonParticipant.Interfaces", "Andgasm.BB.SeasonParticipant.Interfaces\Andgasm.BB.SeasonParticipant.Interfaces.csproj", "{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SeasonParticipant.Interfaces", "Andgasm.BB.SeasonParticipant.Interfaces\Andgasm.BB.SeasonParticipant.Interfaces.csproj", "{61F16CC8-59BF-4963-B8C3-AA01FE50B06C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

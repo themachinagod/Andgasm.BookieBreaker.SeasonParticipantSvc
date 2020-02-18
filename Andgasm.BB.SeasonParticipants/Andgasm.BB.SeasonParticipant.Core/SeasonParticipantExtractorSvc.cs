@@ -30,7 +30,8 @@ namespace Andgasm.BB.SeasonParticipant.Core
         {
             _logger.LogDebug("SeasonParticipantExtractorSvc is registering to new season events...");
             _harvester.CookieString = await _cookiesvc.GetCookieFromRootDirectives();
-            _newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            //_newseasonBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            await ProcessMessagesAsync(BuildNewSeasonEvent("2", "7361", "16368", "252", "gb-eng"), new CancellationToken());
             _logger.LogDebug("SeasonParticipantExtractorSvc is now listening for new season events");
             await Task.CompletedTask;
         }
@@ -66,6 +67,18 @@ namespace Andgasm.BB.SeasonParticipant.Core
             _logger.LogDebug($"- Stack: {context.StackTrace}");
             _logger.LogDebug($"- Source: {context.Source}");
             return Task.CompletedTask;
+        }
+
+        public static BusEventBase BuildNewSeasonEvent(string tournamentcode, string seasoncode, string stagecode, string regioncode, string countrycode)
+        {
+            dynamic jsonpayload = new ExpandoObject();
+            jsonpayload.TournamentKey = tournamentcode;
+            jsonpayload.SeasonKey = seasoncode;
+            jsonpayload.StageKey = stagecode;
+            jsonpayload.RegionKey = regioncode;
+            jsonpayload.CountryKey = countrycode;
+            var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
+            return new BusEventBase(payload);
         }
     }
 }

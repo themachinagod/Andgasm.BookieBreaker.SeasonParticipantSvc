@@ -12,8 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.1.8" />
-    <PackageReference Include="Andgasm.Http" Version="0.1.1" />
+    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.2.15" />
     <PackageReference Include="Andgasm.ServiceBus" Version="0.0.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
   </ItemGroup>

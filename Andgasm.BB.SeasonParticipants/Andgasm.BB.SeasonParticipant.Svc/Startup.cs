@@ -61,12 +61,14 @@ namespace Andgasm.BB.SeasonParticipant.Extractor.Svc
                 services.AddTransient<IHttpRequestManager, HttpRequestManager>();
                 services.AddTransient<ICookieInitialiser, CookieInitialiser>();
                 services.AddTransient<ISeasonParticipantHarvester, SeasonParticipantHarvester>();
-                services.AddSingleton<IHarvestRequestManager>((ctx) =>
-                {
-                    return new HarvestRequestManager(ctx.GetService<ILogger<HarvestRequestManager>>(), 
-                                                     Convert.ToInt32(Configuration["MaxRequestsPerSecond"]));
-                });
-                
+                //services.AddSingleton<IHarvestRequestManager>((ctx) =>
+                //{
+                //    return new HarvestRequestManager(ctx.GetService<ILogger<HarvestRequestManager>>(),
+                //                                     ctx.GetService<HttpRequestManager>(),
+                //                                     Convert.ToInt32(Configuration["MaxRequestsPerSecond"]));
+                //});
+
+                services.AddSingleton<IHarvestRequestManager, HarvestRequestManager>();
                 services.AddSingleton(sp =>
                 {
                     return ServiceBusFactory.GetBus(Enum.Parse<BusHost>(Configuration.GetSection("ServiceBus")["ServiceBusHost"]),

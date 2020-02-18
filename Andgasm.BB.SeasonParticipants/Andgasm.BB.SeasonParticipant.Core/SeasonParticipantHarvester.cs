@@ -9,6 +9,7 @@ using System.Dynamic;
 using Andgasm.BB.Harvest.Interfaces;
 using Andgasm.Http.Interfaces;
 using Andgasm.BB.SeasonParticipant.Interfaces;
+using System.Net;
 
 namespace Andgasm.BB.SeasonParticipant.Core
 {
@@ -38,10 +39,9 @@ namespace Andgasm.BB.SeasonParticipant.Core
         #endregion
 
         #region Contructors
-        public SeasonParticipantHarvester(ApiSettings settings, ILogger<SeasonParticipantHarvester> logger, IHarvestRequestManager harvestrequestmanager, IHttpRequestManager httpmanager)
+        public SeasonParticipantHarvester(ApiSettings settings, ILogger<SeasonParticipantHarvester> logger, IHarvestRequestManager harvestrequestmanager, IHttpRequestManager httpmanager) : base(harvestrequestmanager)
         {
             _logger = logger;
-            _requestmanager = harvestrequestmanager;
             _httpmanager = httpmanager;
 
             _participantsapiroot = settings.SeasonsDbApiRootKey;
@@ -74,8 +74,8 @@ namespace Andgasm.BB.SeasonParticipant.Core
                     foreach (var cr in ParseClubsFromResponse(responsedoc))
                     {
                         clubs.Add(CreateSeasonParticipant(cr));
-                    }                   
-                    await _httpmanager.Post(clubs, _participantsapiroot, _registrationsApiPath); // TODO: handle success/fail
+                    }
+                    await _httpmanager.Post(clubs, $"{_participantsapiroot}/api/{_registrationsApiPath}"); // TODO: handle success/fail
                     _logger.LogDebug(string.Format("Stored club season registrations data to database for season '{0}'", SeasonKey));
                 }
                 else
@@ -95,11 +95,9 @@ namespace Andgasm.BB.SeasonParticipant.Core
 
         private async Task<IHarvestRequestResult> ExecuteRequest()
         {
-            // TODO: hardwired accept string for now!!
             var url = CreateRequestUrl();
-            var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", null,
-                                                            CookieString,
-                                                            null, false, false, false);
+            var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", null,
+                                                            WebUtility.UrlEncode(CookieString), "en-GB,en;q=0.9", false, true, false);
             var p = await _requestmanager.MakeRequest(url, ctx);
             if (p != null) LastModeKey = GetLastModeKey(p.InnerText);
             return p;

@@ -1,5 +1,6 @@
 using Andgasm.BB.Harvest;
 using Andgasm.BB.Harvest.Interfaces;
+using Andgasm.Http;
 using Andgasm.Http.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -92,7 +93,7 @@ namespace Andgasm.BB.SeasonParticipant.Core.Tests
         {
             var s = new Mock<ApiSettings>();
             var e = new Mock<IHarvestRequestManager>();
-            var es = e.Setup(x => x.MakeRequest(It.IsAny<string>(), It.IsAny<HarvestRequestContext>(), false));
+            var es = e.Setup(x => x.MakeRequest(It.IsAny<string>(), It.IsAny<HttpRequestContext>(), false));
             if (!nullrequest)
             {
                 es.ReturnsAsync(new HarvestRequestResult()
@@ -106,7 +107,7 @@ namespace Andgasm.BB.SeasonParticipant.Core.Tests
                 es.Returns(Task.FromResult<IHarvestRequestResult>(null));
             }
             var h = new Mock<IHttpRequestManager>();
-            h.Setup(x => x.Post(It.IsAny<List<ExpandoObject>>(), It.IsAny<string>(), It.IsAny<string>())).Callback<List<ExpandoObject>, string, string, string[]>((x, y, z, d) => identifiedClubs = x);
+            h.Setup(x => x.Post(It.IsAny<List<ExpandoObject>>(), It.IsAny<string>(), null)).Callback<List<ExpandoObject>, string, IHttpRequestContext>((x, y, z) => identifiedClubs = x);
 
             SeasonParticipantHarvester ucs = new SeasonParticipantHarvester(s.Object, new Logger<SeasonParticipantHarvester>(new NullLoggerFactory()), e.Object, h.Object);
             if (setcountry) ucs.CountryKey = "test";
