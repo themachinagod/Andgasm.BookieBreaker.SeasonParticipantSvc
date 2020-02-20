@@ -113,7 +113,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
             ctx.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko");
             ctx.AddHeader("Accept-Encoding", "");
             ctx.AddHeader("Host", "www.whoscored.com");
-            ctx.AddCookie("Cookie", CookieString);
+            //ctx.AddCookie("Cookie", CookieString);
             ctx.Timeout = 120000;
             return ctx;
         }
