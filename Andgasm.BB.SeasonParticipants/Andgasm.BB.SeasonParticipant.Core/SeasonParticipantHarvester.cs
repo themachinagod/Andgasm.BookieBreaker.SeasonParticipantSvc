@@ -10,6 +10,7 @@ using Andgasm.BB.Harvest.Interfaces;
 using Andgasm.Http.Interfaces;
 using Andgasm.BB.SeasonParticipant.Interfaces;
 using System.Net;
+using Andgasm.Http;
 
 namespace Andgasm.BB.SeasonParticipant.Core
 {
@@ -96,11 +97,24 @@ namespace Andgasm.BB.SeasonParticipant.Core
         private async Task<IHarvestRequestResult> ExecuteRequest()
         {
             var url = CreateRequestUrl();
-            var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", null,
-                                                            WebUtility.UrlEncode(CookieString), "en-GB,en;q=0.9", false, true, false);
+            var ctx = ConstructRequestContext();
             var p = await _requestmanager.MakeRequest(url, ctx);
             if (p != null) LastModeKey = GetLastModeKey(p.InnerText);
             return p;
+        }
+
+        private HttpRequestContext ConstructRequestContext()
+        {
+            var ctx = new HttpRequestContext();
+            ctx.Method = "GET";
+            ctx.AddHeader("Accept", "text/html, application/xhtml+xml, image/jxr, */*");
+            ctx.AddHeader("Accept-Language", "en-GB,en-US;q=0.7,en;q=0.3");
+            ctx.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko");
+            ctx.AddHeader("Accept-Encoding", "gzip, deflate");
+            ctx.AddHeader("Host", "www.whoscored.com");
+            ctx.AddCookie("Cookie", CookieString);
+            ctx.Timeout = 120000;
+            return ctx;
         }
         #endregion
 
