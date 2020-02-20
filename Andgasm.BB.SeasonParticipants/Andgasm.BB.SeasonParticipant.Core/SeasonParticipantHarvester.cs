@@ -111,7 +111,7 @@ namespace Andgasm.BB.SeasonParticipant.Core
             ctx.AddHeader("Accept", "text/html, application/xhtml+xml, image/jxr, */*");
             ctx.AddHeader("Accept-Language", "en-GB,en-US;q=0.7,en;q=0.3");
             ctx.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko");
-            ctx.AddHeader("Accept-Encoding", "");
+            ctx.AddHeader("Accept-Encoding", "gzip, deflate");
             ctx.AddHeader("Host", "www.whoscored.com");
             //ctx.AddCookie("Cookie", CookieString);
             ctx.Timeout = 120000;
